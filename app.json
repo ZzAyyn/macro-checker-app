@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "macro-check",
-    "slug": "macro-check",
+    "slug": "macrozone",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -39,6 +39,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "69028fea-de4c-4715-a813-01696afa7932"
+      }
+    },
+    "owner": "zaynn404s-team"
   }
 }
