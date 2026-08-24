@@ -1,17 +1,16 @@
-import { Text, View, StyleSheet } from "react-native";
+import { ScrollView, Text, StyleSheet } from "react-native";
+import { globalStyles } from "@/styles/global";
+import HomeHeader from "@/components/HomeHeader";
 
-export default function Index() {
+const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>This is my First Time using React Native !</Text>
-    </View>
+    <ScrollView style={globalStyles.container}>
+      <Text style={globalStyles.title}>MacroZone</Text>
+      <Text>
+        <HomeHeader />
+      </Text>
+    </ScrollView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default HomeScreen;
