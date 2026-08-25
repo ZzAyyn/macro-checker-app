@@ -1,3 +1,4 @@
+import { colors } from "@/styles/global";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
@@ -7,8 +8,7 @@ export default function RootLayout() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="meals" />
+      <Stack.Screen name="(tabs)" />
     </Stack>
   );
 }
