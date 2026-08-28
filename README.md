@@ -1,8 +1,51 @@
-# Welcome to your Expo app 👋
+# MacroZone
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A minimal mobile app for tracking daily macros (calories, protein, carbs, fat). Log meals, see your running totals against daily goals, and review or clear your meal history — all stored locally on-device.
 
-## Get started
+Built with [Expo](https://expo.dev) and [Expo Router](https://docs.expo.dev/router/introduction/).
+
+## Features
+
+- **Home dashboard** — today's date plus a macro grid showing totals for calories, protein, carbs, and fat against daily goals
+- **Add Meal** — log a meal's name, calories, protein, carbs, and fat
+- **All Meals** — full meal history with a "Clear All" action
+- **Recent Meals** — the 5 most recently logged meals, shown on the home screen
+- **Delete a meal** — long-press any meal to remove it (with haptic feedback)
+- **Local persistence** — meals are saved on-device with `AsyncStorage`, no backend required
+
+## Tech stack
+
+- [Expo](https://expo.dev) (SDK 55) + [Expo Router](https://docs.expo.dev/router/introduction/) (file-based routing)
+- React Native 0.83 / React 19
+- TypeScript
+- `@react-native-async-storage/async-storage` for local persistence
+- `@react-navigation/bottom-tabs` for tab navigation
+- `expo-haptics`, `@expo/vector-icons`
+
+## Project structure
+
+```
+src/
+├── app/
+│   ├── _layout.tsx           # Root layout
+│   └── (tabs)/
+│       ├── _layout.tsx       # Bottom tab navigator (Home, Add Meal, All Meals)
+│       ├── index.tsx         # Home screen — macro totals + recent meals
+│       ├── add-meal.tsx      # Add Meal form
+│       └── meals.tsx         # Full meal list + clear all
+├── components/
+│   ├── HomeHeader.tsx
+│   ├── MacroGrid.tsx
+│   ├── MacroCard.tsx
+│   ├── MealItem.tsx
+│   └── RecentMeals.tsx
+├── storage/
+│   └── meals.ts               # AsyncStorage CRUD helpers for meals
+└── styles/
+    └── global.ts               # Shared colors and styles
+```
+
+## Getting started
 
 1. Install dependencies
 
@@ -16,41 +59,28 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+From the Expo CLI output you can open the app in:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- a [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- an [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- an [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Other available scripts:
 
 ```bash
-npm run reset-project
+npm run android   # expo start --android
+npm run ios       # expo start --ios
+npm run web       # expo start --web
+npm run lint      # expo lint
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Roadmap / ideas
 
-### Other setup steps
+- Configurable daily macro goals (currently hardcoded: 2,000 cal / 150g protein / 250g carbs / 65g fat)
+- Edit existing meals
+- Daily/weekly history and charts
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## License
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Private project — no license specified.
