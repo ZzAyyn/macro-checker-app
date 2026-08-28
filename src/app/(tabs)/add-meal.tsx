@@ -2,6 +2,7 @@ import { addMeal } from "@/storage/meals";
 import { colors, globalStyles } from "@/styles/global";
 import { router } from "expo-router";
 import { useState } from "react";
+import * as Haptics from "expo-haptics";
 import {
   View,
   Text,
@@ -20,9 +21,10 @@ const AddMealScreen = () => {
 
   const handleAddMeal = async () => {
     if (!name || !calories) {
-      Alert.alert("Error", "Please enter meal name and Calories.");
+      Alert.alert("Error", "Please enter a meal name and calories.");
       return;
     }
+
     await addMeal({
       name,
       calories: Number(calories),
@@ -37,20 +39,23 @@ const AddMealScreen = () => {
     setCarbs("");
     setFat("");
 
-    Alert.alert("success", "Meal added successfully!");
+    Alert.alert("Success", "Meal added successfully!");
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     router.push("/");
   };
 
   return (
     <View style={globalStyles.container}>
       <Text style={globalStyles.title}>Add Meal</Text>
+
       <TextInput
         style={styles.input}
-        placeholder="Meal Name"
+        placeholder="Meal name"
         placeholderTextColor={colors.textSecondary}
         value={name}
         onChangeText={setName}
       />
+
       <TextInput
         style={styles.input}
         placeholder="Calories"
@@ -59,6 +64,7 @@ const AddMealScreen = () => {
         value={calories}
         onChangeText={setCalories}
       />
+
       <View style={styles.row}>
         <TextInput
           style={[styles.input, styles.rowInput]}
