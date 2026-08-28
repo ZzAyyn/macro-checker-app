@@ -1,4 +1,6 @@
+import { addMeal } from "@/storage/meals";
 import { colors, globalStyles } from "@/styles/global";
+import { router } from "expo-router";
 import { useState } from "react";
 import {
   View,
@@ -6,6 +8,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 const AddMealScreen = () => {
@@ -13,10 +16,29 @@ const AddMealScreen = () => {
   const [calories, setCalories] = useState("");
   const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
-  const [fat, setfat] = useState("");
+  const [fat, setFat] = useState("");
 
-  const handleAddMeal = () => {
-    console.log({ name, calories, protein, carbs, fat });
+  const handleAddMeal = async () => {
+    if (!name || !calories) {
+      Alert.alert("Error", "Please enter meal name and Calories.");
+      return;
+    }
+    await addMeal({
+      name,
+      calories: Number(calories),
+      protein: Number(protein) || 0,
+      carbs: Number(carbs) || 0,
+      fat: Number(fat) || 0,
+    });
+
+    setName("");
+    setCalories("");
+    setProtein("");
+    setCarbs("");
+    setFat("");
+
+    Alert.alert("success", "Meal added successfully!");
+    router.push("/");
   };
 
   return (
@@ -60,7 +82,7 @@ const AddMealScreen = () => {
           placeholderTextColor={colors.textSecondary}
           keyboardType="numeric"
           value={fat}
-          onChangeText={setfat}
+          onChangeText={setFat}
         />
       </View>
 
